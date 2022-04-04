@@ -1,10 +1,6 @@
-\setuppapersize[A5]
-
+    \setuppapersize[A5]
 
 \title{Een andere kijk op taal}
-
-
-
 
 \definehead     [intro] [chapter]
 \setuphead      [intro] [number=no]
@@ -16,7 +12,6 @@
    input boxes;
 \stopMPinclusions
 
-
 \startuseMPgraphic{model}
 
     numeric rl, m;
@@ -26,7 +21,7 @@
     plc = (0,0);
     prc = (rl,0);
     pr  = 1/2[plc,prc];
-    
+
     % concepten
     boxit.l(\MPvar{lc});
     l.c = plc;
@@ -54,8 +49,14 @@
     label.bot(\MPvar{rls},pr);
     label.bot(\MPvar{rs},prc);
 
-    setbounds currentpicture to boundingbox currentpicture enlarged 6mm
+    string meta;
+    meta := \MPvar{meta} ;
 
+    setbounds currentpicture to boundingbox currentpicture enlarged 6mm;
+    if not(meta=""):
+        draw boundingbox currentpicture withpen pencircle scaled 1mm withcolor .8white; 
+        label.bot(meta,(rl/2,15));
+    fi;
 \stopuseMPgraphic
 
 
@@ -129,7 +130,7 @@ woordsoorten te herkennen binnen een zin. Door er achter te komen om wat voor wo
 het gaat kun je de tekst beter begrijpen en spellen.
 
 \chapter{De relatie}
-De zin “Mats kookt” kun je ook grammaticaal beschrijven. Mats is hierbij het onderwerp en kookt
+De zin “Mats kookt” kun je ook grammaticaal beschrijven. Mats is het onderwerp en kookt
 de persoonsvorm.
 Hierbij is het onderwerp het woord waar het over gaat in de zin en de persoonsvorm een relatie.
 In dit geval is niet nader toegelicht wat Mats kookt. Dit klink waarschijnlijk nog abstract maar zal
@@ -144,8 +145,8 @@ tussen Mats en Pasta.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="",rlcx="",rcx="",ls="",rls="",rs=""}
-    
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
+
 Dit is alles om een relatie tot stand te brengen. Je maakt een relatie tussen twee ongerelateerde
 concepten. Alle “ruis” die een zin kan bevatten veranderd niet de relatie maar specificeert of
 geeft context aan deze relatie.
@@ -178,7 +179,7 @@ pasta.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="",rlcx="",rcx="",ls="kleine",rls="",rs="verse"}
+    lcx="",rlcx="",rcx="",ls="kleine",rls="",rs="verse",meta=""}
 
 Specificeer-woorden kun je ook gebruiken om andere specificeer-woorden te verduidelijken.
 Bijvoorbeeld: “De hele kleine Mats kookt super verse pasta”.
@@ -187,7 +188,7 @@ Bijvoorbeeld: “De hele kleine Mats kookt super verse pasta”.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="",rlcx="",rcx="",ls="hele kleine",rls="",rs="super verse"}
+    lcx="",rlcx="",rcx="",ls="hele kleine",rls="",rs="super verse",meta=""}
 
 \chapter{Context}
 Naast dat je woorden kunt specificeren kun je ze ook in context plaatsen.
@@ -199,7 +200,7 @@ niets over Mats zelf. Ook “veel” zegt niets over pasta (zoals verse) maar ge
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="mijn",rlcx="",rcx="veel",ls="",rls="",rs=""}
+    lcx="mijn",rlcx="",rcx="veel",ls="",rls="",rs="",meta=""}
 
 Anders dan met specificeer woorden kun je context-woorden ook toevoegen aan de relatie en
 heeft ook alleen betekenis in de context van de relatie. Dat wil zeggen wanneer je pasta
@@ -240,7 +241,7 @@ als woordsoort beschouwen.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="een meesterkok",rlcx="",rcx="",ls="",rls="",rs=""}
+    lcx="een meesterkok",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
 
 Je hebt zelfs woordsoorten die alleen iets betekenen als frase. Zo bestaat er voorzetsels die op
 zichzelf geen betekenis hebben. Voorbeelden van voorzetsels zijn: voor, op boven, etc. maar in
@@ -251,7 +252,7 @@ Mats kookt pasta op de camping
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="",rlcx="",rcx="op de camping",ls="",rls="",rs=""}
+    lcx="",rlcx="",rcx="op de camping",ls="",rls="",rs="",meta=""}
 
 Je zult merken dat veel zinnen voorzetsels bevatten. Door de frase als één woordsoort te zien
 kom je sneller bij de relatie.
@@ -280,7 +281,7 @@ Nouja, Mats kookt pasta.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="TODO",rlcx="",rcx="",ls="",rls="",rs=""}
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta="nouja"}
 
 Vergelijkbaar met meta-context bestaan er ook relaties die op een volledige zin duiden in plaats
 van een concept. Een voorbeeld is: hij zegt “Mats kookt pasta”. Hierbij is de relatie zegt
@@ -290,25 +291,25 @@ verbonden met de zin Mats kookt pasta.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="TODO",rlcx="",rcx="",ls="",rls="",rs=""}
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta="hij zegt"}
 
 \chapter{Herkenning van woorden}
-Met dit model het herkennen van woorden een stuk eenvoudiger voor mij omdat je de
+Met dit model is het herkennen van woorden een stuk eenvoudiger voor mij omdat je de
 afhankelijkheden terug kan brengen naar een simpel model. Aan de hand van een aantal
-voorbeelden laat ik zien hoe je dit model kan gebruiken om je spelling te verbeteren. Om dit
+voorbeelden laat ik zien hoe je dit model kan gebruiken om je vocabulaire te vergroten. Om dit
 beter uit te leggen geef ik eerst een korte introductie tot woordvorming.
 
 \section{Woordvorming}
 Woorden kunnen zelf opgesplitst worden in delen, zogenoemde morfemen die betekenis geven
 aan een woord. Dit is praktisch omdat je anders voor elk concept of relatie een volledig nieuw
 woord nodig hebt. Daarnaast worden de woorden vaak opgebouwd volgens een vooraf bepaald
-schema. Vooral dit laatste was voor mij een nieuw inzicht waardoor spelling en herkenning van
+schema. Vooral dit laatste was voor mij een nieuw inzicht\footnote{https://linguistics.as.uky.edu/video/defaults-morphological-theory-workshop-inheritance-and-construction-morphology} waardoor spelling en herkenning van
 woorden een stuk eenvoudiger werd. Ik heb woorden altijd gezien als op zichzelf staande
 betekenissen. De woorden als aartsbisschop en aartsvijand hadden voor mij geen verband en
 moest ik individueel onthouden. Nu weet ik dat ze in een schema passen van het morfeem
 aarts-. Het schema ziet er als volgt uit:
 
-%[aarts-, [x]z1]z \Longleftrightarrow [hoogste range x1]
+[aarts-, [x]z1]z \Longleftrightarrow [hoogste range x1]
 
 Hier staat zoiets als alle woorden met een prefix aarts- voor een woord (als variabele x) van het
 soort zelfstandig naamwoord (subscript z1) heeft de betekenis hoogste rang van variabel x en is
@@ -316,16 +317,48 @@ zelf ook een zelfstandig naamwoord. Wellicht heb je nog nooit van het woord aart
 maar weet nu wel de betekenis. Mijn verwachting is dat je dit niet direct begrijpt maar door een
 aantal voorbeelden ga je het patroon herkennen.
 
-%[[x]w1, -baar]bn \Longleftrightarrow  [kunnen ondergaan x1]
+Wat je hier eigenlijk doet is een concept specificeren zonder een specificeer woord toe te voegen.
+
+
+\reuseMPgraphic{model}{
+    lc="mats",
+    r="kookt",
+    rc="aartspasta",
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
+
+Nu heb ik geen idee wat ik me bij aartspasta moet voorstellen. (iets van paste met de beste 
+kwaliteit of iets dergelijks). Maar het gaat hiet om het voorbeeld. Het concept blijft staan.
+
+
+[[x]w1, -baar]bn \Longleftrightarrow  [kunnen ondergaan x1]
 
 In dit schema wordt een werkwoord (w1) omgezet naar een bijvoeglijk naamwoord (bn) met de
-betekenis kunnen ondergaan zoals breekbaar en schaalbaar.
-%[[x]bn1, -heid]z \Longleftrightarrow  [verkeren in x1]
+betekenis kunnen ondergaan zoals breekbaar en schaalbaar. M.a.w. je veranderd een relatiewoord
+naar een specificeerwoord.
+
+Zie wat er gebeurd met de volgende zin waarbij ik de relatie omzet.
+
+\reuseMPgraphic{model}{
+    lc="mats",
+    r="kookt",
+    rc="pasta",
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
+
+de relatie kook zetten we om en geven aan dat Mats pasta heeft. 
+\reuseMPgraphic{model}{
+    lc="mats",
+    r="heeft",
+    rc="pasta",
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="kookbare",meta=""}
+
+Nu weten we dat het om kookbare pasta gaat.
+
+[[x]bn1, -heid]z \Longleftrightarrow  [verkeren in x1]
 
 In dit schema wordt een bijvoeglijk naamwoord omgezet naar een zelfstandig naamwoord met
 de betekenis, verkeren in, zoals beleefdheid en absoluutheid.
 
-%[[x]z1, -achtig]z \Longleftrightarrow  [in rijke mate x1]
+[[x]z1, -achtig]z \Longleftrightarrow  [in rijke mate x1]
 
 In dit schema blijft het lexicale woordsoort gelijk maar geeft het de betekenis van in rijke mate
 zoals bergachtig of rimpelachtig.
@@ -402,7 +435,7 @@ De volgende zin komt uit een schoolopdracht van mijn tienjarige dochter.
     lc="mats",
     r="kookt",
     rc="pasta",
-    lcx="TODO",rlcx="",rcx="",ls="",rls="",rs=""}
+    lcx="TODO",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
 
 
 \chapter{Verschil maakt duidelijk (achtergrond)}
@@ -435,6 +468,6 @@ ook van je zus btw)”. Met taal kun je zoveel uitdrukken maar nog meer verknoei
 hou van jou
 
 
-\stoptext
+\stoptext:
 
 \end{document}

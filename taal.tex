@@ -1,68 +1,13 @@
-    \setuppapersize[A5]
 
-\title{Een andere kijk op taal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\definehead     [intro] [chapter]
-\setuphead      [intro] [number=no]
 
-\definecombinedlist     [content][list={intro,chapter,section}]
-\setuplist      [intro] [headnumber=no]
-
-\startMPinclusions
-   input boxes;
-\stopMPinclusions
-
-\startuseMPgraphic{model}
-
-    numeric rl, m;
-    rl := 6cm; % lengte van de ralatie
-    mt := 8mm; % marge tussen concept en context/specificeerwoorden
-    pair pr, plc, prc;
-    plc = (0,0);
-    prc = (rl,0);
-    pr  = 1/2[plc,prc];
-
-    % concepten
-    boxit.l(\MPvar{lc});
-    l.c = plc;
-    l.dx = 6mm;
-    boxit.r(\MPvar{rc});
-    r.c = prc;
-    drawboxed(l,r);
-
-    % relatie
-    draw l.c -- r.c cutbefore bpath.l cutafter bpath.r;
-    boxit.relatie(\MPvar{r});
-    relatie.c = pr;
-    fill bpath relatie withcolor basiccolors[0];
-    drawunboxed(relatie);
-
-    %context labels
-    labeloffset := mt;
-    label.top(\MPvar{lcx},plc);
-    label.top(\MPvar{rlcx},pr);
-    label.top(\MPvar{rcx},prc);
-
-    %lspecificeer labels
-    labeloffset := -mt;
-    label.bot(\MPvar{ls},plc);
-    label.bot(\MPvar{rls},pr);
-    label.bot(\MPvar{rs},prc);
-
-    string meta;
-    meta := \MPvar{meta} ;
-
-    setbounds currentpicture to boundingbox currentpicture enlarged 6mm;
-    if not(meta=""):
-        draw boundingbox currentpicture withpen pencircle scaled 1mm withcolor .8white; 
-        label.bot(meta,(rl/2,15));
-    fi;
-\stopuseMPgraphic
-
+\title{een andere kijk op taal}
+Colin Meerveld
 
 \starttext
-
-\completecontent
 \startfrontmatter
 \intro{voorwoord}
 Taal is zeg maar echt niet mijn ding. Bestempeld als dyslect had ik mij daar bij neergelegd. Ik
@@ -87,6 +32,8 @@ Over het algemeen weet ik de spellingregels maar had geen idee wanneer ik het mo
 toepassen. Iedereen kan het ezelsbruggetje van ‘t kofschip leren maar als je niet weet dat een
 zin in verschillende tijden — en zelfs micro tijden — kan staan kun je het niet toepassen.
 \stopfrontmatter
+
+\completecontent
 
 \chapter{De basis}
 Je gebruikt taal om te communiceren. Je wilt bijvoorbeeld een idee uitleggen of een
@@ -293,7 +240,7 @@ verbonden met de zin Mats kookt pasta.
     rc="pasta",
     lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta="hij zegt"}
 
-\chapter{Herkenning van woorden}
+\chapter{Herkenning}
 Met dit model is het herkennen van woorden een stuk eenvoudiger voor mij omdat je de
 afhankelijkheden terug kan brengen naar een simpel model. Aan de hand van een aantal
 voorbeelden laat ik zien hoe je dit model kan gebruiken om je vocabulaire te vergroten. Om dit
@@ -308,18 +255,18 @@ woorden een stuk eenvoudiger werd. Ik heb woorden altijd gezien als op zichzelf 
 betekenissen. De woorden als aartsbisschop en aartsvijand hadden voor mij geen verband en
 moest ik individueel onthouden. Nu weet ik dat ze in een schema passen van het morfeem
 aarts-. Het schema ziet er als volgt uit:
+\blank
 
 [aarts-, [x]z1]z \Longleftrightarrow [hoogste range x1]
 
+\blank
 Hier staat zoiets als alle woorden met een prefix aarts- voor een woord (als variabele x) van het
 soort zelfstandig naamwoord (subscript z1) heeft de betekenis hoogste rang van variabel x en is
 zelf ook een zelfstandig naamwoord. Wellicht heb je nog nooit van het woord aartslui gehoord
 maar weet nu wel de betekenis. Mijn verwachting is dat je dit niet direct begrijpt maar door een
 aantal voorbeelden ga je het patroon herkennen.
-
+\blank
 Wat je hier eigenlijk doet is een concept specificeren zonder een specificeer woord toe te voegen.
-
-
 \reuseMPgraphic{model}{
     lc="mats",
     r="kookt",
@@ -328,38 +275,44 @@ Wat je hier eigenlijk doet is een concept specificeren zonder een specificeer wo
 
 Nu heb ik geen idee wat ik me bij aartspasta moet voorstellen. (iets van paste met de beste 
 kwaliteit of iets dergelijks). Maar het gaat hiet om het voorbeeld. Het concept blijft staan.
-
+\blank
 
 [[x]w1, -baar]bn \Longleftrightarrow  [kunnen ondergaan x1]
 
+\blank
 In dit schema wordt een werkwoord (w1) omgezet naar een bijvoeglijk naamwoord (bn) met de
 betekenis kunnen ondergaan zoals breekbaar en schaalbaar. M.a.w. je veranderd een relatiewoord
 naar een specificeerwoord.
-
+\blank
 Zie wat er gebeurd met de volgende zin waarbij ik de relatie omzet.
-
+\blank
 \reuseMPgraphic{model}{
     lc="mats",
     r="kookt",
     rc="pasta",
     lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
-
+\blank
 de relatie kook zetten we om en geven aan dat Mats pasta heeft. 
+\blank
 \reuseMPgraphic{model}{
     lc="mats",
     r="heeft",
     rc="pasta",
     lcx="",rlcx="",rcx="",ls="",rls="",rs="kookbare",meta=""}
-
+\blank
 Nu weten we dat het om kookbare pasta gaat.
+\blank
 
 [[x]bn1, -heid]z \Longleftrightarrow  [verkeren in x1]
 
+\blank
 In dit schema wordt een bijvoeglijk naamwoord omgezet naar een zelfstandig naamwoord met
 de betekenis, verkeren in, zoals beleefdheid en absoluutheid.
+\blank
 
 [[x]z1, -achtig]z \Longleftrightarrow  [in rijke mate x1]
 
+\blank
 In dit schema blijft het lexicale woordsoort gelijk maar geeft het de betekenis van in rijke mate
 zoals bergachtig of rimpelachtig.
 Je kunt eenvoudig nieuwe woorden creëren met deze schema's waardoor je vocabulaire
@@ -381,30 +334,41 @@ laat zien hoe je het model toepast om de juiste spelling toe te passen.
 In een zin is tijd vaak een belangrijk onderdeel om je idee over te brengen. Nu was het voor mij
 altijd ontzettend moeilijk om überhaupt te herkennen of een zin in de tegenwoordige tijd of
 verleden tijd stond laat staan of deze al dan niet voltooid was.
+
+\section{Tegenwoordige tijd}
 Nu weet ik dat de tijd aangegeven wordt in de relatie. Bijvoorbeeld in de zin: Mats kookt pasta.
 Bevat de relatie “kookt” de tijd. De regel die daar bij hoord is: je voegt altijd een “t” toe tenzij het
 1ste persoon (dwz. “ik”) is of voor een vragend voornaamwoord staat (vind jij? Niet: vindt jij?).
 Dus ik brand en hij brandt.
-[[x]v, -t]v als x geen 1ste persoon of vragend voornaamwoord is
+\blank
+
+[[x]v, -t]v als x geen 1ste persoon, gebiedende wijs of vragend voornaamwoord is
+
+\blank
+\section{Verleden tijd}
 Lastiger is de verleden tijd zoals Mats kookte pasta. Je voegt hier “de” of “te” wanneer het
 enkelvoud is– bij meervoud plaats je nog een -n erachter. Ook is het lastig wanneer je nu een t
 of d schrijft gelukkig weet je nu wanneer je ‘t kofschip moet gebruiken.
+\blank
 
 [[x]v , -te(n)/-de(n)]v
 
-\section{Voltooid en onvoltooid}
+\blank
+\section{Voltooid}
 Elke tijd heeft nog een micro tijd. Hier kun je nog iets aan het doen zijn (onvoltooid) of je heb het
 net gedaan (voltooid). Bijvoorbeeld de zin: “Mats heeft Pasta gekookt”. Door weer naar de
 relatie te kijken kun je vrij snel zien dat het morfeem “ge-” is toegevoegd. Deze relatie heeft
-altijd een hulpwerkwoord en kan je ook daarom ook in de relatie plaatsen. In dit voorbeeld “heeft
-gekookt”. Heeft is tegenwoordige tijd. Dat wil zeggen dat Mats *nu net* zijn pasta heeft gekookt.
+altijd een hulpwerkwoord en kan je daarom ook in de relatie plaatsen. In dit voorbeeld “heeft
+gekookt”. Heeft is tegenwoordige tijd. Dat wil zeggen dat Mats, {\em nu net}, zijn pasta heeft gekookt.
 Zou je willen uitdrukken dat Mats gisteren (dus in het verleden) pasta heeft gekookt dan
 verander je het hulpwerkwoord in had. Dus Mats had pasta gekookt.
 Het fijne van voltooide werkwoorden is dat de spelling altijd hetzelfde blijft. Je kunt het volgende
 schema gebruiken
+\blank
 
 [ge- [x]v -t/-d]
 
+\blank
 \section{Specificeren}
 Wanneer je een concept specificeert gaat het altijd om een bijvoeglijk naamwoord en eindigt (op
 een aantal uitzonderingen na) op een -e. Bijvoorbeeld: Grote Mats kookt lekkere Pasta. En niet:
@@ -423,22 +387,96 @@ de zin: “Mats kookt uitsluitend verse pasta” zegt iets over verse. Dus Mats 
 verse pasta maar misschien maakt hij er nog wel een salade bij.
 
 
-\chapter{In de praktijk}
+\chapter{De praktijk}
 We hebben nu vooral eenvoudige zinnen gebruikt als “Mats kookt pasta”. Dit hoofdstuk laat zien
 hoe je het model in de praktijk gebruikt. Door een aantal voorbeelden te gebruiken
 (krantenartikelen, magazines, et cetera) laat ik zien hoe ik deze lees en interpreteer volgens het model.
+Het model helpt me maar je kunt ook zien welke worsteling ik nog steeds heb.  
 
-\section{nog te groeperen}
+\section{spelling van werkwoorden}
 
-De volgende zin komt uit een schoolopdracht van mijn tienjarige dochter.
+De volgende zinnen komen uit een schoolopdracht van mijn tienjarige dochter. 
+De opdracht bestaat uit het juist invullen van het missende werkwoord. Het hele werkwoord wordt gegeven.
+Als kind kwam ik hier echt niet uit en zie ook dat mijn dochter er moeite mee heeft. Niet omdat ze dyslectisch is 
+maar omdat de regels lastig uit te leggen zijn.
+
+Nu weet ik dat ik me alleen maar op de relatiewoorden hoef te richten. Dit woord is al gegeven dus is het alleen
+nog maar de verbinding zoeken en de regels toepassen. 
+\blank
+\zin Vorig jaar {em trachtte} een inbreker ons huis binnen te dringen
+
 \reuseMPgraphic{model}{
-    lc="mats",
-    r="kookt",
-    rc="pasta",
-    lcx="TODO",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
+    lc="inbreker",
+    r="trachtte",
+    rc="binnen te dringen",
+    lcx="",rlcx="vorig jaar",rcx="ons huis",ls="",rls="",rs="",meta=""}
+
+Het werkwoord trachten wordt hier als trachtte gespeld omdat inbreker enkelfout is en de tracht de stam (stam + te).
+verwarrend aan deze zin is wellicht het woord dringen. Dit is een zogenaamde onbepaalde wijs en kan je op het verkeerde
+been zetten. Ik zou dit als relatiewoord gezien kunnen hebben. Dit zou ook zo kunnen zijn als de zin iets anders
+neergezet was. Het volgende voorbeeld laat dit zien.
+
+Dit jaar dringen inbrekers ons huis binnen. 
+
+\reuseMPgraphic{model}{
+    lc="inbrekers",
+    r="dringen",
+    rc="binnen",
+    lcx="",rlcx="dit jaar",rcx="ons huis",ls="",rls="",rs="",meta=""}
+.
+
+\zin Lenie {\em stond} meer dan een kwartier op de bus te wachten
+
+\reuseMPgraphic{model}{
+    lc="lenie",
+    r="stond",
+    rc="te wachten",
+    lcx="",rlcx="meer dan een kwartier",rcx="op de bus",ls="",rls="",rs="",meta=""}
+
+Weer zien we in deze zin een onbepaalde wijs (komt door het woordje 'te') maar een andere hoofdbreker is het onregelmatige
+werkwoord. In dit geval, het werkwoord stond. Nu heb ik niet zoveel moeite met dit voorbeeld maar loop hier wel eens tegenaan. denk bijvoorbeeld
+aan stofzuigen. Is het nu stofzuigde of stofzoog? In deze situaties ga ik naar de website van de Genootschap Onze Taal 
+\footnote{https://onzetaal.nl/taaladvies/zoek-spelling}. Overigens had hier ook 'staat' kunnen staan.
 
 
-\chapter{Verschil maakt duidelijk (achtergrond)}
+\zin Heb je gezien, wie daar in de snackbar {\em bediend}?
+
+Oefening 1, zin 3 hoe moeilijk wil je het maken? Het lastige van deze zin is dat het eigenlijk twee zinnen zijn die met een
+voorzetsel aan elkaar zijn verbonden. Daarnaast is het een vraag en vragen beginnen altijd met een werkwoord. In het schema leest 
+het dus minder lekker. Om met de eerste zin te beginnen. De relatie bestaat uit het hulpwerkwoord heb. Deze verbind het 
+verwijzend voornaamwoord 'je' met het voltooid deelwoord 'gezien' zoals het volgende schema laat zien.
+
+
+\reuseMPgraphic{model}{
+    lc="je",
+    r="heb",
+    rc="gezien",
+    lcx="",rlcx="",rcx="",ls="",rls="",rs="",meta=""}
+
+
+De tweede zin wordt verbonden met het voorzetsel daar. Het werkwoord bediend verbind het verwijzend voornaamwoord wie. Het is
+bediend en niet bediende omdat het om de voltooid tegenwoordige tijd gaat en kun je zien door de relatie heb. het is niet had.
+n omdat het voltooid is schrijf je geen t achter bediend. 
+
+\reuseMPgraphic{model}{
+    lc="wie",
+    r="bediend",
+    rc="(gasten)",
+    lcx="",rlcx="in de snackbar",rcx="",ls="",rls="",rs="de",meta=""}
+
+wat je aan dit voorbeeld mooi kunt zien hoe taal werkt. Eigenlijk zou de zin moeten zijn. Heb je gezien, wie daar 
+de gasten, in de snackbar, bediend. De gasten is weggelaten en wordt verondersteld dat dit duidelijk is of niet noodzakelijk.
+\break
+\zin Vroeger {\em werkten} men van 's morgens vroeg tot 's avonds laat.
+
+\reuseMPgraphic{model}{
+    lc="men",
+    r="werkten",
+    rc="van 's morgens vroeg tot 's avonds laat",
+    lcx="",rlcx="vroeger",rcx="",ls="",rls="",rs="",meta=""}
+
+
+\chapter{Achtergrond}
 Dat ik een taalachterstand had wist ik maar werd pas echt zichtbaar toen ik mijn vrouw leerde
 kennen. Zij is iemand die heel erg talig is.
 Wanneer we samen door een onbekende stad wandelen weet zij precies alle straten te
@@ -465,8 +503,7 @@ Hoe zeg je dat je van iemand houd? De eerste paar jaar (niet overdreven) dat ik 
 vriendin, mijn huidige vrouw, wilde sturen heb ik dit steeds op moeten zoeken. Ik had geen idee.
 Is het “ik houd van jou” (formeel) of ”ik hou van jouw (zus?)”. Of is het toch “ik hou van je (en
 ook van je zus btw)”. Met taal kun je zoveel uitdrukken maar nog meer verknoeien. Lieverd, ik
-hou van jou
-
+hou van jou!
 
 \stoptext:
 

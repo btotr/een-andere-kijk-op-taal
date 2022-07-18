@@ -1,0 +1,25 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BACK  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setupcolors[state=local, textcolor=black]
+\startuseMPgraphic{back}
+   StartPage ;
+     fill Page withcolor yellow ;
+   StopPage ;
+\stopuseMPgraphic
+
+\defineoverlay[back][\useMPgraphic{back}]
+\setupbackgrounds[page][background=back]
+
+\startstandardmakeup
+  \raggedcenter
+  \vfill \definedfont[file:Roboto-Regular.otf at 12pt]\setstrut \strut 18-07-22 
+\stopstandardmakeup
+
+
+\setupbackgrounds[page][background=]
+
+
+\end
